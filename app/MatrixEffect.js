@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react';
 const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const getRandomCharacter = () => characters.charAt(Math.floor(Math.random() * characters.length));
-
 export const MatrixEffect = () => {
   const canvasRef = useRef(null);
 
@@ -21,7 +20,9 @@ export const MatrixEffect = () => {
 
     const drops = [];
 
-    for (let i = 0; i < columns; i++) drops[i] = 1;
+    // 用随机值初始化drops数组以使字符在屏幕上分布
+    for (let i = 0; i < columns; i++) 
+        drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
 
     const draw = () => {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
