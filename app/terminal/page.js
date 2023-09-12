@@ -5,7 +5,7 @@ import { Session } from '@e2b/sdk';
 
 export default function Terminal(props) {
   const [commands, setCommands] = useState([
-    { command: "Welcome to flash terminal!", result: "This is a disposable terminal execution environment with Ubuntu 22 bash and Node.js. \nOnce you refresh the page or close the webpage, the environment will be automatically cleaned up. \nType '/help' to get help info."}
+    { command: "Welcome to flash terminal!", result: "This is a disposable terminal execution environment with Ubuntu 22 bash and Node.js. \nOnce you refresh the page or close the webpage, the environment will be automatically cleaned up. \nType '/help' to get help info. Ctrl+C to kill current process."}
   ]);
   const [currentCommand, setCurrentCommand] = useState("");
   const terminalRef = useRef(null);
@@ -15,7 +15,6 @@ export default function Terminal(props) {
   const router = useRouter();
   const [session, setSession] = useState();
   const [currentOutput, setCurrentOutput] = useState("");
-
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -67,6 +66,15 @@ export default function Terminal(props) {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === "c" && e.ctrlKey) {
+      console.log("Ctrl+C detected!");
+      if (window.currentProcess) {
+        window.currentProcess.kill();
+      }
+    }
+  }
+
   const executeCommand = async (command) => {
     let result = "";
 
@@ -101,6 +109,7 @@ export default function Terminal(props) {
             setCurrentOutput(prevOutput => prevOutput + output.line + "\n");
           },
         }).then(async (processInit) => {
+          window.currentProcess = processInit;
           await processInit.finished;
           // 假设 processInit 有一个 finished 属性表示进程是否完成
           if (processInit.finished) {
@@ -115,6 +124,7 @@ export default function Terminal(props) {
             console.log('command', commands);
           }
         });
+
         break;
     }
 
@@ -148,6 +158,7 @@ export default function Terminal(props) {
           ref={inputRef}
           value={currentCommand}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           onKeyPress={handleKeyPress}
           className="bg-black focus:outline-none w-full text-green-500"
         />
