@@ -72,7 +72,27 @@ export default function Terminal(props) {
       if (window.currentProcess) {
         window.currentProcess.kill();
       }
+      return;
     }
+
+    switch (event.key) {
+      case "ArrowUp":
+        console.log("Up arrow key pressed");
+        setCurrentCommand( commands[commands.length - 1].command );
+        break;
+      case "ArrowDown":
+        console.log("Down arrow key pressed");
+        break;
+      case "ArrowLeft":
+        console.log("Left arrow key pressed");
+        break;
+      case "ArrowRight":
+        console.log("Right arrow key pressed");
+        break;
+      default:
+        break;
+    }
+
   }
 
   const executeCommand = async (command) => {
