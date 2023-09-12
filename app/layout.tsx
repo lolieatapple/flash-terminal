@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Flash Terminal',
-  description: 'This is a disposable terminal execution environment with Ubuntu 22 bash and Node.js.',
+  description: 'Welcome to the Flash Terminal, a sleek, modern, and efficient cloud terminal! This is a one-time-use terminal. If you refresh or close the page, all data will be automatically cleared and lost.',
 }
 
 export default function RootLayout({

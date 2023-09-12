@@ -1,34 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flash Terminal ⚡
 
-## Getting Started
+Welcome to the Flash Terminal, a sleek, modern, and efficient cloud terminal!
 
-First, run the development server:
+![Flash Terminal Logo](./app/favicon.ico)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## ⚠️ Important Note
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Attention!** This is a one-time-use terminal. If you refresh or close the page, all data will be automatically cleared and lost.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features 🚀
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **One-Time Terminal:** Get instant access to a terminal whenever you need.
+- **Powerful Hardware:** Comes equipped with:
+  - 4-core CPU for speedy computations.
+  - 1GB RAM to handle your multitasking needs.
+  - 3GB HDD storage for your files and projects.
+- **Network Enabled:** Stay connected and pull in resources or data from the web.
 
-## Learn More
+## How to Use ❓
 
-To learn more about Next.js, take a look at the following resources:
+1. Visit the Flash Terminal [webpage](https://flash-terminal.vercel.app/).
+2. Click on the `Enter` button.
+3. Dive into your isolated terminal and start coding!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributions 🤝
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+We welcome contributions to the Flash Terminal! Whether it's features, bug fixes, or documentation, we'd love to have you.
