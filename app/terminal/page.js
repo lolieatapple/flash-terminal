@@ -14,12 +14,14 @@ export default function Terminal(props) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const [session, setSession] = useState();
+  const [currentOutput, setCurrentOutput] = useState("");
+
 
   useEffect(() => {
     if (terminalRef.current) {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  }, [commands]);
+  }, [commands, currentOutput]);
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -46,6 +48,12 @@ export default function Terminal(props) {
       }
     }
     func();
+
+    return () => {
+      if (session) {
+        session.close();
+      }
+    }
   }, [])
 
   const handleInputChange = (e) => {
@@ -73,24 +81,43 @@ export default function Terminal(props) {
       case "/host":
         console.log('https://' + session.getHostname());
         result = 'https://' + session.getHostname();
+        setCommands([...commands, { command, result }]);
         break;
       case "/host3000":
         console.log('https://' + session.getHostname(3000));
         result = 'https://' + session.getHostname(3000);
+        setCommands([...commands, { command, result }]);
         break;
       default:
-        const processInit = await session.process.start({
+        setCurrentOutput("");
+        session.process.start({
           cmd: command,
-          onStdout: output => console.log(output.line),
-          onStderr: output => console.log(output.line),
+          onStdout: output => {
+            console.log(output.line);
+            setCurrentOutput(prevOutput => prevOutput + output.line + "\n");
+          },
+          onStderr: output => {
+            console.log(output.line);
+            setCurrentOutput(prevOutput => prevOutput + output.line + "\n");
+          },
+        }).then(async (processInit) => {
+          await processInit.finished;
+          // 假设 processInit 有一个 finished 属性表示进程是否完成
+          if (processInit.finished) {
+            setCommands(pre => {
+              const finalOutput = processInit.output.stdout + processInit.output.stderr;
+              console.log('finalOutput', processInit, processInit.output.stdout);
+              const _pre = [...pre];
+              _pre.push({ command, result: finalOutput });
+              return _pre;
+            });
+            setCurrentOutput(""); // 执行完命令后再次清空输出
+            console.log('command', commands);
+          }
         });
-        await processInit.finished;
-        result = processInit.output.stdout + processInit.output.stderr;
-
         break;
     }
 
-    setCommands([...commands, { command, result }]);
   }
 
   if (loading) {
@@ -112,6 +139,7 @@ export default function Terminal(props) {
             <div className="whitespace-pre">{cmd.result}</div>
           </div>
         ))}
+        <div className="whitespace-pre">{currentOutput}</div>
       </div>
       <div className="flex items-center">
         <span className="mr-2">$</span>
