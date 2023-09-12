@@ -26,3 +26,8 @@ Welcome to the Flash Terminal, a sleek, modern, and efficient cloud terminal!
 ## Contributions 🤝
 
 We welcome contributions to the Flash Terminal! Whether it's features, bug fixes, or documentation, we'd love to have you.
+
+---
+
+Powered By [e2b.dev](https://www.e2b.dev)
+

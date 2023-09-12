@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-
 export default function Home() {
   const router = useRouter();
   return (
@@ -25,7 +24,13 @@ export default function Home() {
           Enter
         </button>
         <p className="text-green-500 text-sm">* One time terminal of 4-core CPU, 1GB RAM, 3GB HDD machine with network.</p>
+
+      {/* Powered by e2b.dev */}
+      <div className="absolute top-48 center-x w-full text-green-500 text-center p-2 rounded">
+        Powered By <a href="https://www.e2b.dev" target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline ">e2b.dev</a>
       </div>
+      </div>
+
     </div>
   )
 }
